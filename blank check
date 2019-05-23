@@ -1,0 +1,130 @@
+import simplegui,random
+box=[True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True]
+pos=[-1,-1]
+ary=[0,1,2,3,4,5,6,7,0,1,2,3,4,5,6,7]
+count=0
+i,i1,i2,i3=0,0,0,0
+score=0
+random.shuffle(ary)
+lst=[]
+def draw(canvas):
+    x,x1=0,0
+    y,y1=0,0
+    for i in range(len(ary)):
+        canvas.draw_text(str(ary[i]),[x1+15,y1+69],60,"white")
+        x1+=50
+    for i in range(len(box)):
+        if box[i]:
+            canvas.draw_polygon([[x,y],[x+50,y],[x+50,y+100],[x,y+100]],1,"black","white")
+            x+=50
+        else:
+            x+=50
+def click(pos):
+    global count,lst,i
+    x=pos[0]
+    if x<=50 and x>0:
+        box[0]=False
+        count+=1
+        i=0
+        check_box()
+    if x<=100 and x>50:
+        box[1]=False
+        count+=1
+        i=1
+        check_box()
+    if x<=150 and x>100:
+        box[2]=False
+        count+=1
+        i=2
+        check_box()
+    if x<=200 and x>150:
+        box[3]=False
+        count+=1
+        i=3
+        check_box()
+    if x<=250 and x>200:
+        box[4]=False
+        count+=1
+        i=4
+        check_box()
+    if x<=300 and x>250:
+        box[5]=False
+        count+=1
+        i=5
+        check_box()
+    if x<=350 and x>300:
+        box[6]=False
+        count+=1
+        i=6
+        check_box()
+    if x<=400 and x>350:
+        box[7]=False
+        count+=1
+        i=7
+        check_box()
+    if x<=450 and x>400:
+        box[8]=False
+        count+=1
+        i=8
+        check_box()
+    if x<=500 and x>450:
+        box[9]=False
+        count+=1
+        i=9
+        check_box()
+    if x<=550 and x>500:
+        box[10]=False
+        count+=1
+        i=10
+        check_box()
+    if x<=600 and x>550:
+        box[11]=False
+        count+=1
+        i=11
+        check_box()
+    if x<=650 and x>600:
+        box[12]=False
+        count+=1
+        i=12
+        check_box()
+    if x<=700 and x>650:
+        box[13]=False
+        count+=1
+        i=13
+        check_box()
+    if x<=750 and x>700:
+        box[14]=False
+        count+=1
+        i=14
+        check_box()
+    if x<=800 and x>750:
+        box[15]=False
+        count+=1
+        i=15
+        check_box()
+def check_box():
+    global lst,count,i,box,lst,i1,i2,i3,score
+    if count==1:
+        i1=i
+        lst.append(ary[i1])
+    if count==2:
+        i2=i
+        lst.append(ary[i2])
+    if count==3:
+        if lst[0]==lst[1]:
+            box[i1]=False
+            box[i2]=False
+            score+=1
+            info.set_text("Score: "+str(score))
+        if lst[0]!=lst[1]:
+            box[i1]=True
+            box[i2]=True
+        i1=i
+        lst=[]
+        lst.append(ary[i1])
+        count=1
+frame=simplegui.create_frame("blank_check",800,100)
+frame.set_draw_handler(draw)
+frame.set_mouseclick_handler(click)
+info=frame.add_label("Score: "+str(score))
+frame.start()
